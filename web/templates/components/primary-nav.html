@@ -11,7 +11,7 @@
 		<li {% if request.path == "/analysis/" %}class="active"{% endif %}><a href="{% url "analysis/recent" %}" title="Recent"><i class="fa fa-th-list"></i> Recent</a></li>
 		<li {% if request.path == "/analysis/pending/" %}class="active"{% endif %}><a href="{% url "analysis.views.pending" %}" title="Pending"><i class="fa fa-cogs"></i> Pending</a></li>
 		<li {% if request.path == "/analysis/search/" %}class="active"{% endif %}><a href="{% url "analysis.views.search" %}" title="Search"><i class="fa fa-search"></i> Search</a></li>
-		<li title="Signature"><i class="fa"></i></li>
+		<li {% if request.path == "/analysis/signature_summary/" %}class="active"{% endif %}><a href="{% url "analysis.views.signature_summary" %}" title="Signature Summary"><i class="fa fa-signaturesummary"></i>Signature Summary</a></li>
 	</ul>
 
 	<ul class="app-nav__nav--right">

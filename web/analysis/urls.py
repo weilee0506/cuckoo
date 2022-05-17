@@ -37,6 +37,7 @@ urlpatterns = [
     url(r"^search/(?P<task_id>\d+)/$", views.search_behavior),
     url(r"^search/$", views.search),
     url(r"^pending/$", views.pending),
+    url(r"^signature_summary/$", views.signature_summary),
     url(r"^(?P<task_id>\d+)/pcapstream/(?P<conntuple>[.,\w]+)/$", views.pcapstream),
     url(r"^moloch"
         r"/(?P<ip>[\d\.]+)?/(?P<host>[ a-zA-Z0-9-_\.]+)?"

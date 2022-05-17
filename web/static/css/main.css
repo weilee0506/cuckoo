@@ -10123,6 +10123,11 @@ readers do not read off random characters that represent icons */
     content: '\f3eb';
 }
 
+.fa-signaturesummary:before
+{
+    content: '\f005'
+}
+
 .fa-seedling:before
 {
     content: '\f4d8';

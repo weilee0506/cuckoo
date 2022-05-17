@@ -29,6 +29,19 @@ results_db = mongo.db
 fs = mongo.grid
 
 @require_safe
+def signature_summary(request):
+    pending = []
+    # for task in Database().list_tasks(status=TASK_PENDING, limit=500):
+    #     pending.append(normalize_task(task.to_dict()))
+    return render_template(request, "analysis/signature_summary.html",
+    #  **{
+    #     "tasks": pending,
+    # }
+    )  
+
+    
+
+@require_safe
 def pending(request):
     pending = []
     for task in Database().list_tasks(status=TASK_PENDING, limit=500):

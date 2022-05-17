@@ -614,8 +614,9 @@ class RunSignatures(object):
                 self.results["metadata"]["cfgextr"] = self.c.results()
             if "info" in self.results:
                 self.results["info"]["score"] = 10
+        esunioc_list = ["ip_match", "domain_match", "hash_match"]
         for matched in self.matched:
-            if matched["name"] == "ip_match" or "domain_match" or "hash_match":
+            if matched["name"] in esunioc_list:
                 self.results["info"]["score"] = 10
         logging.warning(self.matched)
 

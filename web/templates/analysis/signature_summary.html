@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    
+<table class="cuckoo-table__fullscreen" id="signature_summary-table">
+
+    <thead>
+
+        <tr>
+            <th>Signature name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Severity</th>
+          
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <!-- table content -->
+        <!-- {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.sample_id }}</td>
+                <td>{{ task.added_on }}</td>
+                <td>{{ task.target }}</td>
+                <td>{{ task.category }}</td>
+                <td>{{ task.status }}</td>
+            </tr>
+        {% endfor %} -->
+
+    </tbody>
+
+  
+
+</table>
+
+{% endblock %}
