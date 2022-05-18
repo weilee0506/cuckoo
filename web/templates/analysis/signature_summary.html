@@ -7,10 +7,12 @@
     <thead>
 
         <tr>
+            
             <th>Signature name</th>
-            <th>Description</th>
             <th>Category</th>
+            <th>Description</th>
             <th>Severity</th>
+            <th>File name</th>
           
         </tr>
 
@@ -19,16 +21,17 @@
     <tbody>
 
         <!-- table content -->
-        <!-- {% for task in tasks %}
+        {% for summary in signature_summary %}
             <tr>
-                <td>{{ task.id }}</td>
-                <td>{{ task.sample_id }}</td>
-                <td>{{ task.added_on }}</td>
-                <td>{{ task.target }}</td>
-                <td>{{ task.category }}</td>
-                <td>{{ task.status }}</td>
+                
+                <td>{{ summary.name }}</td>
+                <td>{{ summary.category }}</td>
+                <td>{{ summary.description }}</td>
+                <td>{{ summary.severity }}</td>
+                <td>{{ summary.file_name }}</td>
+                
             </tr>
-        {% endfor %} -->
+        {% endfor %}
 
     </tbody>
 

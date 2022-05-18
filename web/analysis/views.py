@@ -8,6 +8,7 @@ import os
 import pymongo
 import re
 import urllib
+import logging
 
 from bson.objectid import ObjectId
 
@@ -30,13 +31,64 @@ fs = mongo.grid
 
 @require_safe
 def signature_summary(request):
-    pending = []
-    # for task in Database().list_tasks(status=TASK_PENDING, limit=500):
-    #     pending.append(normalize_task(task.to_dict()))
+    signature_summary = []
+    logging.warning("****************************************")
+    # get signature summary from signature folder
+    # get gid of extractor folder because the files inside aren't signatures
+    signature_sub_folder_list = ["android", "cross", "darwin", "linux", "network", "windows"]
+    path = "//home//cuckoo//.cuckoo//signatures//"
+    for signature_sub_folder in signature_sub_folder_list:
+        temp_infolder_files_list = []
+        infolder_files_list = []
+        whole_path = path + signature_sub_folder
+        temp_infolder_files_list = os.listdir(whole_path)
+        for infolder_file in temp_infolder_files_list:
+            if infolder_file[0] != "." and "__init__" not in infolder_file:
+                infolder_files_list.append(infolder_file)
+        # logging.warning(signature_sub_folder)
+        # logging.warning(infolder_files_list)
+        for signature_file_name in infolder_files_list:
+            signature_detail = {}
+            signature_file_path = whole_path + "//" + signature_file_name
+            # logging.warning(signature_file_name)
+            signature_file = open(signature_file_path, 'r')
+            signature_lines = signature_file.readlines()
+            # logging.warning(signature_lines)
+            signature_description = ""
+
+            # get description
+            for line_index in range(len(signature_lines)):
+                if "description = " in signature_lines[line_index] and "self." not in signature_lines[line_index]:
+                    signature_description += signature_lines[line_index]
+                    logging.warning(signature_description)
+                    for check_line in range(line_index+1, len(signature_lines)):
+                        if "severity =" in signature_lines[check_line] or "authors =" in signature_lines[check_line]:
+                            break
+                        signature_description += signature_lines[check_line]
+                if signature_description:
+                    break  
+
+            for signature_line in signature_lines:
+                if "name = \"" in signature_line and "self." not in signature_line:
+                    signature_detail["name"] = signature_line[slice(12,-2)]
+                    break
+            for signature_line in signature_lines:
+                if "categories = [" in signature_line and "self." not in signature_line:
+                    signature_detail["category"] = signature_line[slice(18,-2)].replace("\"","")
+                    break
+            for signature_line in signature_lines:
+                if "severity =" in signature_line and "self." not in signature_line:
+                    signature_detail["severity"] = signature_line
+                    break
+            signature_detail["file_name"] = signature_file_name
+            signature_detail["description"] = signature_description[slice(19,-2)]
+                
+            signature_summary.append(signature_detail)
+   
     return render_template(request, "analysis/signature_summary.html",
-    #  **{
-    #     "tasks": pending,
-    # }
+     **{
+        "signature_summary": signature_summary,
+    }
     )  
 
     
@@ -46,6 +98,7 @@ def pending(request):
     pending = []
     for task in Database().list_tasks(status=TASK_PENDING, limit=500):
         pending.append(normalize_task(task.to_dict()))
+        logging.warning(normalize_task(task.to_dict()))
 
     return render_template(request, "analysis/pending.html", **{
         "tasks": pending,

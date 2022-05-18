@@ -143,7 +143,4 @@ def normalize_task(task):
         )
     return task
 
-# get signature summary from signature folder
-def get_signature_summary():
-    signature_sub_folder_list = ["android", "cross", "darwin", "extractor", "linux", "network", "windows"]
-    return
+
