@@ -45,22 +45,20 @@ def signature_summary(request):
         for infolder_file in temp_infolder_files_list:
             if infolder_file[0] != "." and "__init__" not in infolder_file:
                 infolder_files_list.append(infolder_file)
-        # logging.warning(signature_sub_folder)
-        # logging.warning(infolder_files_list)
+
         for signature_file_name in infolder_files_list:
+            signature_folder = signature_sub_folder
             signature_detail = {}
             signature_file_path = whole_path + "//" + signature_file_name
-            # logging.warning(signature_file_name)
             signature_file = open(signature_file_path, 'r')
             signature_lines = signature_file.readlines()
-            # logging.warning(signature_lines)
             signature_description = ""
 
             # get description
             for line_index in range(len(signature_lines)):
                 if "description = " in signature_lines[line_index] and "self." not in signature_lines[line_index]:
                     signature_description += signature_lines[line_index]
-                    logging.warning(signature_description)
+                    # logging.warning(signature_description)
                     for check_line in range(line_index+1, len(signature_lines)):
                         if "severity =" in signature_lines[check_line] or "authors =" in signature_lines[check_line]:
                             break
@@ -78,20 +76,25 @@ def signature_summary(request):
                     break
             for signature_line in signature_lines:
                 if "severity =" in signature_line and "self." not in signature_line:
-                    signature_detail["severity"] = signature_line
+                    signature_detail["severity"] = signature_line[slice(15,-1)]
                     break
+            signature_detail["signature_folder"] = signature_folder
             signature_detail["file_name"] = signature_file_name
             signature_detail["description"] = signature_description[slice(19,-2)]
                 
             signature_summary.append(signature_detail)
-   
+    logging.warning(results_db)
     return render_template(request, "analysis/signature_summary.html",
      **{
         "signature_summary": signature_summary,
     }
     )  
 
-    
+@require_safe
+def signature_add(request):
+    return render_template(request, "analysis/signature_add.html", **{
+        
+    })
 
 @require_safe
 def pending(request):

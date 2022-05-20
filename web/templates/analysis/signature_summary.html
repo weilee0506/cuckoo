@@ -1,8 +1,55 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
-    
-<table class="cuckoo-table__fullscreen" id="signature_summary-table">
+
+<!-- CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.1/css/all.css"/>
+<link href="{% static "css/design1.css"%}" rel="stylesheet" type="text/css" />
+
+
+
+<!-- jq -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+<!-- <div id="recent_analysis">
+    <div class="nav_container" style="margin-bottom:30px;">
+        <div></div>
+        <div id="item"><a href="#" data-filter="cat_files">android</a></div>
+        <div id="item"><a href="#" data-filter="cat_urls">cross</a></div>
+        <div id="item"><a href="#" data-filter="score_0-4">darwin</a></div>
+        <div id="item"><a href="#" data-filter="score_4-7">linux</a></div>
+        <div id="item"><a href="#" data-filter="score_7-10">network</a></div>
+        <div id="item"><a href="#" data-filter="score_7-10">windows</a></div>
+    </div>
+</div> -->
+
+<!-- <script src="{% static "js/cuckoo/signature_summary.js" %}"></script> -->
+
+<!-- <div>
+    <form id="signature_search_form" action=""> 
+        <input type="text" class="signature_search_text" id="signature_search_text" name="signature_search_text" placeholder="Search for signature..." style=" width: 50%">
+        <input type="submit" value="search">
+        <input type="button" id="clear" value="reset" >
+    </form>
+</div> -->
+
+<script>
+$(document).ready( function () {
+	$("#signature_summary-table").DataTable({
+        "order": [[5,"asc"]],
+        "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "all"] ],
+        "info": false,
+    });
+} );
+
+
+</script>
+
+<table id="signature_summary-table" class="cuckoo-table__fullscreen">
 
     <thead>
 
@@ -13,6 +60,8 @@
             <th>Description</th>
             <th>Severity</th>
             <th>File name</th>
+            <th>signature folder</th>
+
           
         </tr>
 
@@ -29,6 +78,7 @@
                 <td>{{ summary.description }}</td>
                 <td>{{ summary.severity }}</td>
                 <td>{{ summary.file_name }}</td>
+                <td>{{ summary.signature_folder }}</td>
                 
             </tr>
         {% endfor %}
@@ -39,4 +89,22 @@
 
 </table>
 
+<footer class="flex-grid__footer spread-alignment">
+    <p class="footnote">
+        &copy;2010-2018 <a href="https://www.cuckoosandbox.org" target="_blank">Cuckoo Sandbox</a>
+    </p>
+    <div class="logo">
+        <img src="{% static "graphic/cuckoo_inverse.png" %}" alt="Cuckoo Malware Analysis Sandbox" />
+        <a href="#">Back to Top</a>
+    </div>
+</footer>
+
+
+
+
 {% endblock %}
+
+
+
+
+

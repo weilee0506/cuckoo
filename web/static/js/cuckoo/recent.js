@@ -24,7 +24,7 @@ var Recent = function () {
         this.params = {
             "cats": [],
             "packs": [],
-            "score": ""
+            "score": "",
         };
     }
 
@@ -57,6 +57,8 @@ var Recent = function () {
             } else if (is_active("score_7-10")) {
                 this.params["score"] = "7-10";
             }
+
+        
 
             //if(is_active('pack_pdf')) this.params['packs'].push('pdf');
             //if(is_active('pack_office')) this.params['packs'].push('office');
