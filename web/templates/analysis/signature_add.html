@@ -12,12 +12,21 @@
 
 </style>
 
+<script>
+    function submitClick() {
+    
+    alert("add signature successfully!\n you need to re-run \"cuckoo -d\" command to activate the new signature!");
+    
+    
+  }
+</script>
+
 <div class="signature_input">
-    <form action="../signature_add_success" method="get">
+    <form action="../signature_add_success" method="get" onsubmit="return submitClick();">
 
         <label>signature name</label>
         <br>
-        <input type="text" name="new_signature_name">
+        <input type="text" name="new_signature_name" required>
         <br>
 
         <label>signature folder</label>
@@ -34,23 +43,23 @@
 
         <label>class name</label>
         <br>
-        <input type="text" name="className">
+        <input type="text" name="className"  required>
         <br>
 
         <label>name</label>
         <br>
-        <input type="text" name="name">
+        <input type="text" name="name"  required>
         <br>
 
         <label>description</label>
         <br>
-        <input type="text" name="description">
+        <input type="text" name="description"  required>
         <br>
         
 
-        <label>severity</label>
+        <label>severity (number only)</label>
         <br>
-        <input type="text" name="severity">
+        <input type="text" name="severity" pattern="[0-9]+"  required>
         <br>
 
         <label>categories</label>
@@ -63,12 +72,12 @@
         <input type="text" name="authors" >
         <br>
 
-        <label>minimum</label>
+        <label>minimum (default)</label>
         <br>
-        <input type="text" name="minimum">
+        <input type="text" name="minimum" value="2.0" readonly="readonly" >
         <br>
 
-        <label>other</label>
+        <label>other (remind the intention!!!)</label>
         <br>
         <textarea name="other"></textarea>
         <br>
@@ -81,8 +90,7 @@
 </div>
 
 <div>
-    {{new_signature_name}}
-    {{new_signature_folder}}
+    
 </div>
 
 <footer class="flex-grid__footer spread-alignment">
