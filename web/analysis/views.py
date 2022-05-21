@@ -26,6 +26,8 @@ from cuckoo.misc import cwd
 from cuckoo.processing import network
 from cuckoo.web.utils import view_error, render_template, normalize_task
 
+
+
 results_db = mongo.db
 fs = mongo.grid
 
@@ -92,7 +94,31 @@ def signature_summary(request):
 
 @require_safe
 def signature_add(request):
+   return render_template(request, "analysis/signature_add.html", **{
+     })
+
+@require_safe
+def signature_add_success(request):
+    header = "from lib.cuckoo.common.abstracts import Signature"
+    new_signature_name = request.GET["new_signature_name"]
+    new_signature_folder = request.GET["new_signature_folder"]
+
+    new_className = "class " + request.GET["className"] + "(Signature):"
+    new_name = "    name = \"" + request.GET["name"] + "\""
+    new_description = "    description = \"" + request.GET["description"] + "\""
+    new_severity = "    severity = " + request.GET["severity"]
+    new_categories = "    categories = \"" + request.GET["categories"] + "\""
+    new_authors = "    authors = \"" + request.GET["authors"] + "\""
+    new_minimum = "    minimum = \"" + request.GET["minimum"] + "\""
+    new_other = request.GET["other"]
+    
+    
+    if request.GET["new_signature_name"]:
+        with open("/home/cuckoo/.cuckoo/signatures/%s/%s.py"%(new_signature_folder,new_signature_name), "w") as f:
+            f.write('{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}'.format(header, new_className, new_name, new_description, new_severity, new_categories, new_authors, new_minimum, new_other))
     return render_template(request, "analysis/signature_add.html", **{
+        "new_signature_name": new_signature_name,
+        "new_signature_folder": new_signature_folder,
         
     })
 

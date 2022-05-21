@@ -1,5 +1,100 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
+<style>
+    textarea {
+        resize: none;
+    }
+
+    .signature_input {
+        padding: 10px;
+    }
+
+</style>
+
+<div class="signature_input">
+    <form action="../signature_add_success" method="get">
+
+        <label>signature name</label>
+        <br>
+        <input type="text" name="new_signature_name">
+        <br>
+
+        <label>signature folder</label>
+        <br>
+        <select name="new_signature_folder">
+            <option>android</option>
+            <option>cross</option>
+            <option>darwin</option>
+            <option>linux</option>
+            <option>network</option>
+            <option>windows</option>
+        </select>
+        <br>
+
+        <label>class name</label>
+        <br>
+        <input type="text" name="className">
+        <br>
+
+        <label>name</label>
+        <br>
+        <input type="text" name="name">
+        <br>
+
+        <label>description</label>
+        <br>
+        <input type="text" name="description">
+        <br>
+        
+
+        <label>severity</label>
+        <br>
+        <input type="text" name="severity">
+        <br>
+
+        <label>categories</label>
+        <br>
+        <input type="text" name="categories">
+        <br>
+
+        <label>authors</label>
+        <br>
+        <input type="text" name="authors" >
+        <br>
+
+        <label>minimum</label>
+        <br>
+        <input type="text" name="minimum">
+        <br>
+
+        <label>other</label>
+        <br>
+        <textarea name="other"></textarea>
+        <br>
+        <br>
+
+        
+
+        <input type="submit" value="Add" >
+    </form>
+</div>
+
+<div>
+    {{new_signature_name}}
+    {{new_signature_folder}}
+</div>
+
+<footer class="flex-grid__footer spread-alignment">
+    <p class="footnote">
+        &copy;2010-2018 <a href="https://www.cuckoosandbox.org" target="_blank">Cuckoo Sandbox</a>
+    </p>
+    <div class="logo">
+        <img src="{% static "graphic/cuckoo_inverse.png" %}" alt="Cuckoo Malware Analysis Sandbox" />
+        <a href="#">Back to Top</a>
+    </div>
+</footer>
+
+
 
 {% endblock %}
