@@ -12,7 +12,7 @@
 		<li {% if request.path == "/analysis/pending/" %}class="active"{% endif %}><a href="{% url "analysis.views.pending" %}" title="Pending"><i class="fa fa-cogs"></i> Pending</a></li>
 		<li {% if request.path == "/analysis/search/" %}class="active"{% endif %}><a href="{% url "analysis.views.search" %}" title="Search"><i class="fa fa-search"></i> Search</a></li>
 		<li {% if request.path == "/analysis/signature_summary/" %}class="active"{% endif %}><a href="{% url "analysis.views.signature_summary" %}" title="Signature Summary"><i class="fa fa-signaturesummary"></i>Signature Summary</a></li>
-		<li {% if request.path == "/analysis/signature_add/" %}class="active"{% endif %}><a href="{% url "analysis.views.signature_add" %}" title="Add Signature"><i class="fa fa-signaturesummary"></i>Add Signature</a></li>
+		<li {% if request.path == "/analysis/signature_add/" %}class="active"{% endif %}><a href="{% url "analysis.views.signature_add" %}" title="Add Signature"><i class="fa fa-signatureadd"></i>Add Signature</a></li>
 
 
 	</ul>

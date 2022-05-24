@@ -68,6 +68,27 @@
                             </div>
                         {% endif %}
 
+
+                        <!-- score with esunioc -->
+                        {% if report.analysis.info.score < 1 %}
+                            <div class="alert esunioc-success">
+                                <p>After comparing with esun_ioc, the score turns to <strong> {{ report.analysis.info.score_with_esun_ioc }}</strong></p>
+                            </div>
+                        {% elif report.analysis.info.score < 2 %}
+                            <div class="alert esunioc-alert-info">
+                                <p>After comparing with esun_ioc, the score turns to <strong> {{ report.analysis.info.score_with_esun_ioc }}</strong></p>
+                            </div>
+                        {% elif report.analysis.info.score < 5 %}
+                            <div class="alert esunioc-alert-warning">
+                                <p>After comparing with esun_ioc, the score turns to <strong> {{ report.analysis.info.score_with_esun_ioc }}</strong></p>
+                            </div>
+                        {% else %}
+                            <div class="alert esunioc-alert-danger">
+                                <p>After comparing with esun_ioc, the score turns to <strong> {{ report.analysis.info.score_with_esun_ioc }}</strong></p>
+                            </div>
+                        {% endif %}
+
+
                         <p style="font-size: 11px;">
                             <b>Please notice</b>: The scoring system is currently still in development and should be
                             considered an <b><i>alpha</i></b> feature.

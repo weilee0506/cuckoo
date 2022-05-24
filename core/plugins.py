@@ -581,6 +581,8 @@ class RunSignatures(object):
             self.call_signature(sig, sig.on_complete)
 
         score, configs = 0, []
+        #esun ioc score sum
+        esun_score = 0
         for signature in self.signatures:
             if not signature.matched:
                 continue
@@ -593,7 +595,12 @@ class RunSignatures(object):
                 }
             )
             self.matched.append(signature.results())
-            score += signature.severity
+            #esun_ioc condition
+            if signature.categories == ["esun_ioc"]:
+                esun_score += signature.severity
+            else:
+                #other condition
+                score += signature.severity
 
             for mark in signature.marks:
                 if mark["type"] == "config":
@@ -604,7 +611,10 @@ class RunSignatures(object):
         self.matched.sort(key=lambda key: key["severity"])
         self.results["signatures"] = self.matched
         if "info" in self.results:
+            #score without esun_ioc
             self.results["info"]["score"] = score / 5.0
+            #score with esun_ioc
+            self.results["info"]["score_with_esun_ioc"] = (score + esun_score) / 5.0
 
         # If malware configuration has been extracted, simplify its
         # accessibility in the analysis report.
@@ -614,11 +624,13 @@ class RunSignatures(object):
                 self.results["metadata"]["cfgextr"] = self.c.results()
             if "info" in self.results:
                 self.results["info"]["score"] = 10
-        esunioc_list = ["ip_match", "domain_match", "hash_match"]
-        for matched in self.matched:
-            if matched["name"] in esunioc_list:
-                self.results["info"]["score"] = 10
-        logging.warning(self.matched)
+                self.results["info"]["score_with_esun_ioc"] = 10 + esun_score/5.0
+        # esunioc_list = ["ip_match", "domain_match", "hash_match"]
+        # for matched in self.matched:
+        #     if matched["name"] in esunioc_list:
+        #         self.results["info"]["new_score"] = 999
+        #         self.results["info"]["score"] = 10
+        # logging.warning(self.matched)
 
 class RunReporting(object):
     """Reporting Engine.

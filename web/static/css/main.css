@@ -10128,6 +10128,11 @@ readers do not read off random characters that represent icons */
     content: '\f005'
 }
 
+.fa-signatureadd:before
+{
+    content: '\f067'
+}
+
 .fa-seedling:before
 {
     content: '\f4d8';
@@ -10920,7 +10925,8 @@ readers do not read off random characters that represent icons */
 
 .fa-tachometer:before
 {
-    content: '\f0e4';
+    /* content: '\f0e4'; */
+    content: '\f3fd';
 }
 
 .fa-tachometer-alt:before

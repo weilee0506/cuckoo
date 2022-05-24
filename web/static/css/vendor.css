@@ -5129,6 +5129,53 @@ a.thumbnail.active {
 .alert-danger .alert-link {
   color: #843534;
 }
+
+.esunioc-alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.esunioc-alert-success hr {
+  border-top-color: #c9e2b3;
+}
+.esunioc-alert-success .alert-link {
+  color: #2b542c;
+}
+.esunioc-alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.esunioc-alert-info hr {
+  border-top-color: #a6e1ec;
+}
+.esunioc-alert-info .alert-link {
+  color: #245269;
+}
+.esunioc-alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+.esunioc-alert-warning hr {
+  border-top-color: #f7e1b5;
+}
+.esunioc-alert-warning .alert-link {
+  color: #66512c;
+}
+.esunioc-alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+.esunioc-alert-danger hr {
+  border-top-color: #e4b9c0;
+}
+.esunioc-alert-danger .alert-link {
+  color: #843534;
+}
+
+
 @-webkit-keyframes progress-bar-stripes {
   from {
     background-position: 40px 0;

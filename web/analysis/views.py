@@ -100,10 +100,10 @@ def signature_add(request):
 @require_safe
 def signature_add_success(request):
     header = "from lib.cuckoo.common.abstracts import Signature"
-    new_signature_name = request.GET["new_signature_name"]
+    new_signature_name = request.GET["new_signature_name"].replace(" ","_")
     new_signature_folder = request.GET["new_signature_folder"]
 
-    new_className = "class " + request.GET["className"] + "(Signature):"
+    new_className = "class " + request.GET["className"].replace(" ","").capitalize() + "(Signature):"
     new_name = "    name = \"" + request.GET["name"] + "\""
     new_description = "    description = \"" + request.GET["description"] + "\""
     new_severity = "    severity = " + request.GET["severity"]
