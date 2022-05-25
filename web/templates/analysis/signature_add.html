@@ -4,6 +4,8 @@
 <style>
     textarea {
         resize: none;
+        width: 800px;
+        height: 300px;
     }
 
     .signature_input {
@@ -19,7 +21,10 @@
     
     
   }
+
+ 
 </script>
+
 
 <div class="signature_input">
     <form action="../signature_add_success" method="get" onsubmit="return submitClick();">
@@ -79,7 +84,8 @@
 
         <label>other (remind the intention!!!)</label>
         <br>
-        <textarea name="other"></textarea>
+        <textarea name="other" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+4;return false;}">    def on_complete(self):
+        return self.has_marks()</textarea>
         <br>
         <br>
 
